@@ -23,11 +23,11 @@
     "clean": "tsc -b --clean && rm -rf .build .sst dist && pnpm run --recursive --if-present clean"
   },
   "devDependencies": {
-    "@aws-cdk/aws-apigatewayv2-alpha": "^2.95.1-alpha.0",
+    "@aws-cdk/aws-apigatewayv2-alpha": "^2.101.1-alpha.0",
     "@tsconfig/node18": "^1.0.1",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
-    "aws-cdk-lib": "2.95.1",
+    "aws-cdk-lib": "2.101.1",
     "constructs": "10.2.69",
     "eslint": "8.34.0",
     "eslint-plugin-simple-import-sort": "^10.0.0",
@@ -36,7 +36,7 @@
     "lint-staged": "^13.2.0",
     "prettier": "^2.8.5",
     "prettier-plugin-tailwindcss": "^0.4.1",
-    "sst": "2.29.2",
+    "sst": "2.32.0",
     "typescript": "^5.0.2",
     "yaml-lint": "^1.7.0"
   },

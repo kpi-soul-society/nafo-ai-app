@@ -12,7 +12,7 @@
   "devDependencies": {
     "@types/node": "^18.13.0",
     "kysely-codegen": "^0.10.0",
-    "sst": "2.29.2",
+    "sst": "2.32.0",
     "vitest": "^0.28.4"
   },
   "dependencies": {
@@ -22,7 +22,7 @@
     "cloudipsp-node-js-sdk": "^1.0.8",
     "kysely": "^0.23.4",
     "mysql2": "^3.6.1",
-    "sst": "2.29.2",
+    "sst": "2.32.0",
     "ulid": "^2.3.0",
     "zod": "^3.21.4"
   }
