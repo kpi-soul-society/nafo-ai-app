@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+/* TODO: dark mode */
+body {
+  /* color: rgb(var(--foreground-rgb)); */
+  /* background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb)); */
+}
+
+.parent-onhover .child-hide-onhover {
+  display: flex;
+}
+
+.parent-onhover:hover .child-hide-onhover {
+  display: none;
+}
+
+.parent-onhover .child-show-onhover {
+  display: none;
+}
+
+.parent-onhover:hover .child-show-onhover {
+  display: flex;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #D9DFF4;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #9ca9d8;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #667dd1;
+}

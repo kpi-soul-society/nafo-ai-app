@@ -1,0 +1,61 @@
+{
+  "name": "nafo-ai",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "sst dev",
+    "dev:web": "pnpm run --filter @nafo-ai/web dev",
+    "build": "sst build",
+    "deploy": "sst deploy",
+    "remove": "sst remove",
+    "console": "sst console",
+    "typecheck": "tsc --noEmit",
+    "gen": "hygen",
+    "gen:db:types": "pnpm -C packages/core db:types",
+    "prepare": "pnpm exec husky install",
+    "prettier:exc": "./node_modules/.bin/prettier --config .prettierrc.yaml --write",
+    "prettier": "pnpm run prettier:exc -- '**/**/*.{js,ts,tsx,css,json,yaml,yml,md}'",
+    "lint": "pnpm run --recursive --aggregate-output lint && pnpm lint:toplevel",
+    "lint:fix": "eslint . --ext .js,.ts,.tsx stacks --fix",
+    "lint:toplevel": "eslint --ext .js,.ts,.tsx stacks",
+    "lint-staged": "lint-staged",
+    "clean": "tsc -b --clean && rm -rf .build .sst dist && pnpm run --recursive --if-present clean"
+  },
+  "devDependencies": {
+    "@aws-cdk/aws-apigatewayv2-alpha": "^2.95.1-alpha.0",
+    "@tsconfig/node18": "^1.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
+    "aws-cdk-lib": "2.95.1",
+    "constructs": "10.2.69",
+    "eslint": "8.34.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "husky": "^8.0.3",
+    "hygen": "^6.2.11",
+    "lint-staged": "^13.2.0",
+    "prettier": "^2.8.5",
+    "prettier-plugin-tailwindcss": "^0.4.1",
+    "sst": "2.29.2",
+    "typescript": "^5.0.2",
+    "yaml-lint": "^1.7.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "overrides": {
+    "graphql": "16.6.0"
+  },
+  "pnpm": {
+    "enable-pre-post-scripts": true
+  },
+  "lint-staged": {
+    "*.{yaml,yml},!(pnpm-lock.yaml)": [
+      "yamllint"
+    ],
+    "{*.{ts,js},!(node*)**/*.{ts,tsx,js,jsx}}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  }
+}

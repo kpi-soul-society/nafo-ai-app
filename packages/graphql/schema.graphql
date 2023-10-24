@@ -1,0 +1,156 @@
+type CheckoutSession {
+  checkoutUrl: String!
+}
+
+type Creation {
+  completionStatus: CreationCompletionStatus!
+  createdAt: String!
+  id: ID!
+  iterationCount: Int!
+  negativePrompt: String
+  parentCreationId: String
+  resultImageUrl: String
+  startingImageUrl: String
+  styles: [Style!]!
+  textPrompt: String
+  updatedAt: String!
+  variationCount: Int!
+  variations: [Variation!]!
+}
+
+enum CreationCompletionStatus {
+  COMPLETED
+  IN_PROGRESS
+  PENDING
+}
+
+enum Currency {
+  EUR
+  UAH
+  USD
+}
+
+type CurrencyToTotalDonation {
+  EUR: Float!
+  UAH: Float!
+  USD: Float!
+}
+
+type Mutation {
+  createCheckoutSession(amount: Int!, currency: Currency!): CheckoutSession!
+  createSupportRequest(customerEmail: String!, details: String!, subject: String!): Boolean!
+  deleteCreation(creationId: String!): Boolean!
+  deleteMyUser: Boolean!
+  setCreationThumbnail(creationId: String!, thumbnailUrl: String!): Creation!
+  setUserReferrerId(referrerId: String!): User!
+  setVariationPublicity(isSharedToCommunity: Int!, variationId: String!): Variation!
+}
+
+type PaginatedCreations {
+  creations: [Creation!]!
+  lastPage: Int!
+  limit: Int!
+  page: Int!
+  total: Int!
+}
+
+type PaginatedVariations {
+  lastPage: Int!
+  limit: Int!
+  page: Int!
+  total: Int!
+  variations: [Variation!]!
+}
+
+type Query {
+  creation(creationId: String!): Creation!
+  me: User!
+  myCreations(limit: Int = 6, page: Int = 1): PaginatedCreations!
+  myStats: UserStats!
+  sharedVariations(limit: Int = 12, page: Int = 1): PaginatedVariations!
+  styles: [Style!]!
+  surprisePrompts: [SurprisePrompt!]!
+  tokenAcquisition(tokenAcquisitionId: String!): TokenAcquisition!
+  user(id: String!): User!
+}
+
+type Style {
+  createdAt: String
+  id: ID!
+  imageUrl: String!
+  name: String!
+  prompt: String!
+  updatedAt: String
+}
+
+type SurprisePrompt {
+  createdAt: String
+  id: ID!
+  prompt: String!
+  updatedAt: String
+}
+
+type TokenAcquisition {
+  createdAt: String!
+  donationCurrencyToTokenExchangeRate: Float!
+  id: ID!
+  paymentProviderTransactionId: String
+  status: TokenAcquisitionStatus!
+  tokenNumber: Int!
+  updatedAt: String!
+  userId: String!
+}
+
+enum TokenAcquisitionStatus {
+  APPROVED
+  DECLINED
+  EXPIRED
+  INITIATED
+  IN_PROGRESS
+}
+
+type User {
+  avatarUrl: String
+  createdAt: String!
+  email: String!
+  firstName: String
+  id: ID!
+  isActive: Int!
+  isLaunchWaitlistMember: Int!
+  lastName: String
+  role: UserRole!
+  tokenNumber: Int!
+  updatedAt: String!
+}
+
+enum UserRole {
+  ADMIN
+  CUSTOMER
+}
+
+type UserStats {
+  totalCreations: Int!
+  totalDonationsByCurrency: CurrencyToTotalDonation!
+  totalReferrals: Int!
+}
+
+type Variation {
+  createdAt: String!
+  creation: VariationCreation!
+  creationId: ID!
+  id: ID!
+  imageUrl: String
+  isSharedToCommunity: Int!
+  updatedAt: String!
+}
+
+type VariationCreation {
+  id: ID!
+  iterationCount: Int!
+  negativePrompt: String
+  resultImageUrl: String
+  startingImageUrl: String
+  styles: [Style!]!
+  textPrompt: String
+  variationCount: Int!
+}

@@ -1,0 +1,15 @@
+dist
+.build
+.next
+.open-next
+packages/*/output
+node_modules
+.idea
+.DS_Store
+*.map
+tsconfig.tsbuildinfo
+packages/infra/cdk.out/
+packages/graphql/*
+packages/infra/.aws*/*
+.sst/*
+pnpm-lock.yaml

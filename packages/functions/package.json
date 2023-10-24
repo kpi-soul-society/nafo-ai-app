@@ -1,0 +1,38 @@
+{
+  "name": "@nafo-ai/functions",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "sst bind 'vitest'",
+    "typecheck": "tsc -noEmit",
+    "lint": "eslint --ext .js,.ts,.tsx src"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.110",
+    "@types/http-errors": "^2.0.1",
+    "@types/node": "^18.13.0",
+    "sst": "2.29.2"
+  },
+  "dependencies": {
+    "@aws-lambda-powertools/logger": "^1.6.0",
+    "@aws-lambda-powertools/metrics": "^1.6.0",
+    "@aws-lambda-powertools/tracer": "^1.6.0",
+    "@aws-sdk/client-apigatewaymanagementapi": "^3.303.0",
+    "@aws-sdk/client-cognito-identity-provider": "^3.282.0",
+    "@aws-sdk/client-dynamodb": "^3.303.0",
+    "@aws-sdk/client-sns": "^3.315.0",
+    "@middy/core": "^4.2.6",
+    "@middy/http-error-handler": "^4.6.0",
+    "@middy/http-header-normalizer": "^4.6.0",
+    "@middy/http-json-body-parser": "^4.6.0",
+    "@middy/http-multipart-body-parser": "^4.6.0",
+    "@pothos/core": "^3.27.1",
+    "@pothos/plugin-validation": "^3.9.0",
+    "@slack/web-api": "^6.9.0",
+    "graphql": "^16.6.0",
+    "http-errors": "^2.0.0",
+    "node-fetch": "^3.3.1",
+    "sst": "2.29.2",
+    "ulid": "^2.3.0"
+  }
+}

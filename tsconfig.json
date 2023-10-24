@@ -1,0 +1,11 @@
+{
+  "extends": "@tsconfig/node18/tsconfig.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@nafo-ai/web/*": ["./packages/web/*"],
+      "@nafo-ai/core/*": ["./packages/core/src/*"]
+    }
+  }
+}

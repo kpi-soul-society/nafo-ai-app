@@ -1,0 +1,19 @@
+# dependencies
+node_modules
+
+# Jetbrains IDEs
+.idea/
+
+# sst
+.sst
+.build
+
+# misc
+.DS_Store
+
+# local env files
+.env*.local
+
+.env
+
+cdk.context.json
