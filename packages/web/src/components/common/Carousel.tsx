@@ -4,6 +4,8 @@ import Image from 'next/image';
 
 import { useCarouselContext } from '@/lib/contexts/CarouselProvider';
 
+import { emptyDogPlaceholder } from '../images/EmptyDog';
+
 export const Carousel = () => {
   const { items, selectedItem, goNext, goBack } = useCarouselContext();
   return (
@@ -16,6 +18,8 @@ export const Carousel = () => {
             alt="NAFO Dog"
             fill
             style={{ objectFit: 'cover' }}
+            placeholder="blur"
+            blurDataURL={emptyDogPlaceholder}
           />
         </div>
         <ChevronRightIcon className={`${items.length <= 1 && 'invisible'} h-12`} onClick={goNext} />

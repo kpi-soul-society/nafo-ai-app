@@ -9,6 +9,10 @@ const nextConfig = {
     },
   },
   webpack(config) {
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+    };
     config.experiments = { ...config.experiments, topLevelAwait: true };
     return config;
   },

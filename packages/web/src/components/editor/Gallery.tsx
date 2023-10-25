@@ -62,8 +62,6 @@ export const Gallery = () => {
                   src="/assets/cozak_squad.png"
                   alt="squad"
                   fill
-                  placeholder="blur"
-                  blurDataURL="/assets/cozak_squad.png"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
                 />
               </div>

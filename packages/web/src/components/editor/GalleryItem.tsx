@@ -16,6 +16,7 @@ import { EditorVariation, useEditorContext } from '@/lib/contexts/EditorProvider
 import useSocketData from '@/lib/hooks/useSocketData';
 
 import { ModalDialog } from '../common/ModalDialog';
+import { emptyDogPlaceholder } from '../images/EmptyDog';
 
 import { CheebsSettings } from './CheebsSettings';
 
@@ -143,7 +144,10 @@ export const GalleryItem = ({
   };
 
   return (
-    <div key={id} className={`relative aspect-[15/20] w-full shrink-0 grow-0 overflow-hidden rounded-2xl`}>
+    <div
+      key={id}
+      className={`text-secondary relative aspect-[15/20] w-full shrink-0 grow-0 overflow-hidden rounded-2xl`}
+    >
       {!image && (
         <div className="absolute left-[50%] top-[50%] z-10 aspect-square w-[95%] translate-x-[-50%] translate-y-[-50%] transform">
           <Image src="/assets/hammer_loader.gif" alt="loader" fill />
@@ -160,8 +164,7 @@ export const GalleryItem = ({
         style={{ objectFit: 'cover' }}
         className={`${(!image || isImageLoading) && 'animate-pulse'}`}
         onClick={openModal}
-        placeholder="blur"
-        blurDataURL="/assets/empty_dog.png"
+        placeholder={emptyDogPlaceholder}
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
       <ModalDialog isOpen={isOpen} onClose={closeModal}>
