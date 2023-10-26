@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 
-import { EmptyDog } from '../images/EmptyDog';
+import { EmptyDogComponent, emptyDogPlaceholder } from '../images/EmptyDog';
 
 const USER_ACTIONS = [
   { name: 'Profile', url: '/profile' },
@@ -26,9 +26,15 @@ export const UserMenu = () => {
           <Menu.Button>
             <div className="border-lavander relative aspect-square w-14 overflow-hidden rounded-full border-4 sm:w-16">
               {session?.user.avatarUrl ? (
-                <Image src={session?.user.avatarUrl} alt="avatar" fill />
+                <Image
+                  src={session?.user.avatarUrl}
+                  alt="avatar"
+                  fill
+                  placeholder="blur"
+                  blurDataURL={emptyDogPlaceholder}
+                />
               ) : (
-                <EmptyDog fill="#667dd1" />
+                <EmptyDogComponent fill="#667dd1" />
               )}
             </div>
           </Menu.Button>

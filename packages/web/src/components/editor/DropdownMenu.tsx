@@ -6,6 +6,7 @@ import { WithId } from '@/lib/hooks/useChipControls';
 import { MenuItem } from '@/lib/hooks/useMenuListControls';
 
 import { Dropdown } from '../common/Dropdown';
+import { emptyDogPlaceholder } from '../images/EmptyDog';
 
 interface DropdownMenuProps<T extends DropdownMenuItem> {
   id: string;
@@ -77,7 +78,7 @@ export const DropdownMenu = <T extends DropdownMenuItem>({
                   priority
                   fill
                   placeholder="blur"
-                  blurDataURL="/assets/empty_dog.png"
+                  blurDataURL={emptyDogPlaceholder}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>

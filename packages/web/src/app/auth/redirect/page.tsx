@@ -1,10 +1,10 @@
 'use client';
 import { useEffect } from 'react';
 import { CreateCheckoutSessionSchema } from '@nafo-ai/core/common/validation';
-import Image from 'next/image';
 import { redirect, useRouter, useSearchParams } from 'next/navigation';
 import { getSession, signIn, SignInOptions, signOut } from 'next-auth/react';
 
+import { CheebsLoader } from '@/components/common/CheebsLoader';
 import { REST_ENDPOINT } from '@/lib/config/next';
 import { useFeatureFlagContext } from '@/lib/contexts/FeatureFlagProvider';
 
@@ -104,15 +104,7 @@ export default function Redirect() {
 
   return (
     <div className="relative flex h-screen min-h-screen flex-col items-center justify-center gap-y-2">
-      <div className="animate-spin-slow relative h-12 w-24 sm:h-20 sm:w-36 lg:h-24 lg:w-48">
-        <Image
-          src="/assets/cheebs.png"
-          alt="cheebs"
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
-      </div>
-      <span className="text-2xl">Loading...</span>
+      <CheebsLoader />
     </div>
   );
 }

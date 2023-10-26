@@ -1,7 +1,7 @@
 'use client';
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { Creation, Style } from '@nafo-ai/graphql/genql';
+import { Style } from '@nafo-ai/graphql/genql';
 
 import { useTypedQuery } from '../client/graphqlClient';
 import { STAGE } from '../config/next';
@@ -116,27 +116,32 @@ export const EditorFormProvider = ({ children }: React.PropsWithChildren) => {
     }
   };
 
-  const storedEvolveItem = sessionStorage.getItem('evolveItem') ?? '';
-  if (storedEvolveItem) {
-    const evolveItem = JSON.parse(storedEvolveItem);
-    const { id, textPrompt, startingImageUrl, negativePrompt, styles } = evolveItem;
-    formMethods.setValue('parentId', id);
-    textPrompt && setTextPrompt(textPrompt);
-    negativePrompt && setNegativePrompt(negativePrompt);
-    negativePrompt && setIsNegativePropmptVisible(true);
-    styles && setStyleSelection(styles);
-    startingImageUrl && setImageUrl(startingImageUrl);
-    sessionStorage.removeItem('evolveItem');
-  }
+  useEffect(() => {
+    if (sessionStorage !== undefined) {
+      const storedEvolveItem = sessionStorage.getItem('evolveItem') ?? '';
+      const storedImageToImage = sessionStorage.getItem('imageToImage') ?? '';
 
-  const storedImageToImage = sessionStorage.getItem('imageToImage') ?? '';
-  if (storedImageToImage) {
-    const imageToImage = JSON.parse(storedImageToImage);
-    const { id, imageUrl } = imageToImage;
-    formMethods.setValue('parentId', id);
-    imageUrl && setImageUrl(imageUrl);
-    sessionStorage.removeItem('imageToImage');
-  }
+      if (storedEvolveItem) {
+        const evolveItem = JSON.parse(storedEvolveItem);
+        const { id, textPrompt, startingImageUrl, negativePrompt, styles } = evolveItem;
+        formMethods.setValue('parentId', id);
+        textPrompt && setTextPrompt(textPrompt);
+        negativePrompt && setNegativePrompt(negativePrompt);
+        negativePrompt && setIsNegativePropmptVisible(true);
+        styles && setStyleSelection(styles);
+        startingImageUrl && setImageUrl(startingImageUrl);
+        sessionStorage.removeItem('evolveItem');
+      }
+
+      if (storedImageToImage) {
+        const imageToImage = JSON.parse(storedImageToImage);
+        const { id, imageUrl } = imageToImage;
+        formMethods.setValue('parentId', id);
+        imageUrl && setImageUrl(imageUrl);
+        sessionStorage.removeItem('imageToImage');
+      }
+    }
+  }, []);
 
   return (
     <EditorFormContext.Provider

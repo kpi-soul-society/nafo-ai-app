@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 
 import { AsyncButton } from '../common/AsyncButton';
 import { ModalDialog } from '../common/ModalDialog';
+import { emptyDogPlaceholder } from '../images/EmptyDog';
 
 interface HallOfFameItemProps {
   id: string;
@@ -67,16 +68,20 @@ export const HallOfFameItem = ({
     {
       name: 'Evolve',
       onClick: () => {
-        sessionStorage.setItem('evolveItem', JSON.stringify({ ...creationData, resultImageUrl: imageUrl }));
-        push('/editor');
+        if (sessionStorage) {
+          sessionStorage.setItem('evolveItem', JSON.stringify({ ...creationData, resultImageUrl: imageUrl }));
+          push('/editor');
+        }
       },
       icon: <ArrowPathIcon className="h-6" />,
     },
     {
       name: 'Img2Img',
       onClick: () => {
-        sessionStorage.setItem('imageToImage', JSON.stringify({ imageUrl, id: creationData.id }));
-        push('/editor');
+        if (sessionStorage) {
+          sessionStorage.setItem('imageToImage', JSON.stringify({ imageUrl, id: creationData.id }));
+          push('/editor');
+        }
       },
       icon: <DocumentDuplicateIcon className="h-6" />,
     },
@@ -106,7 +111,7 @@ export const HallOfFameItem = ({
         style={{ objectFit: 'cover' }}
         className={`${isImageLoading && 'animate-pulse'}`}
         placeholder="blur"
-        blurDataURL="/assets/empty_dog.png"
+        blurDataURL={emptyDogPlaceholder}
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         {...(isAuthenticated ? { onClick: openModal } : {})}
       />
@@ -136,8 +141,10 @@ export const HallOfFameItem = ({
                   priority
                   fill
                   style={{ objectFit: 'cover' }}
-                  className={`${isImageLoading && 'animate-pulse'}`}
                   onClick={openModal}
+                  placeholder="blur"
+                  blurDataURL={emptyDogPlaceholder}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>
             </div>

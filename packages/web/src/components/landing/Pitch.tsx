@@ -8,14 +8,13 @@ import { LANDING_PITCH_DOG_ASSETS } from '@/lib/constants/assets';
 import { useFeatureFlagContext } from '@/lib/contexts/FeatureFlagProvider';
 
 import { SignInDialog } from '../common/SignInDialog';
-
+import { emptyDogPlaceholder } from '../images/EmptyDog';
 export const Pitch = () => {
   const [isSignInDialogOpen, setSignInDialogOpen] = useState(false);
   const { data: session } = useSession();
   const router = useRouter();
   const { isFeatureEnabled } = useFeatureFlagContext();
   const isWaitlistEnabled = isFeatureEnabled('isWaitlistEnabled');
-
   return (
     <div className="flex flex-col justify-between gap-x-12 gap-y-6 sm:flex-row sm:gap-y-0">
       <div className="flex w-full flex-col justify-center gap-y-2 sm:mt-5 sm:w-1/3 sm:gap-y-6 md:w-1/2 xl:gap-y-10">
@@ -36,13 +35,15 @@ export const Pitch = () => {
       </div>
       <div className="flex w-full flex-wrap justify-center gap-4 sm:w-1/2 sm:justify-end">
         {LANDING_PITCH_DOG_ASSETS.map((asset) => (
-          <div className="sm:w-2/7 relative aspect-square w-2/5" key={asset}>
+          <div className="sm:w-2/7 relative aspect-square w-2/5 overflow-hidden rounded-3xl" key={asset}>
             <Image
               src={asset}
               alt="NAFO dog"
               priority
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              placeholder="blur"
+              blurDataURL={emptyDogPlaceholder}
             />
           </div>
         ))}

@@ -1,6 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
 
+import { emptyDogPlaceholder } from '../images/EmptyDog';
+
 export const RecentCreations = () => {
   return (
     <div className="flex flex-col gap-y-8 sm:gap-y-14">
@@ -15,6 +17,8 @@ export const RecentCreations = () => {
             alt="Recent NAFO avatars"
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            placeholder="blur"
+            blurDataURL={emptyDogPlaceholder}
           />
         </div>
 
@@ -24,6 +28,8 @@ export const RecentCreations = () => {
             alt="Recent NAFO avatars"
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            placeholder="blur"
+            blurDataURL={emptyDogPlaceholder}
           />
         </div>
 
@@ -33,6 +39,8 @@ export const RecentCreations = () => {
             alt="Recent NAFO avatars"
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            placeholder="blur"
+            blurDataURL={emptyDogPlaceholder}
           />
         </div>
       </div>

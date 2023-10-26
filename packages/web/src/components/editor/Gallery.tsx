@@ -3,8 +3,8 @@ import Image from 'next/image';
 
 import { useEditorContext } from '@/lib/contexts/EditorProvider';
 
+import { CheebsLoader } from '../common/CheebsLoader';
 import { Pagination } from '../common/Pagination';
-import { Loader } from '../images/Loader';
 
 import { GalleryItem } from './GalleryItem';
 
@@ -53,7 +53,7 @@ export const Gallery = () => {
         >
           {isLoading ? (
             <>
-              <Loader className="fill-secondary h-16 w-16 animate-spin text-gray-200" /> Loading...
+              <CheebsLoader />
             </>
           ) : (
             <div className="flex w-full flex-col items-center">
@@ -62,8 +62,6 @@ export const Gallery = () => {
                   src="/assets/cozak_squad.png"
                   alt="squad"
                   fill
-                  placeholder="blur"
-                  blurDataURL="/assets/cozak_squad.png"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
                 />
               </div>

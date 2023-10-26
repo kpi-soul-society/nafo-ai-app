@@ -8,8 +8,8 @@ import { useTypedQuery } from '@/lib/client/graphqlClient';
 import { MAIN_PAGES } from '@/lib/constants/pages';
 import { useBreakpoint } from '@/lib/hooks/useBreakpoint';
 
+import { CheebsLoader } from '../common/CheebsLoader';
 import { CommonHeader } from '../common/CommonHeader';
-import { Loader } from '../images/Loader';
 
 import { HallOfFameItem } from './HallOfFameItem';
 
@@ -46,11 +46,11 @@ export const HallOfFame = () => {
   const routes = session ? MAIN_PAGES : [];
 
   return (
-    <>
+    <div className="h-screen min-h-screen">
       <div className="px-10 lg:px-20">
         <CommonHeader linkPreset={routes} />
       </div>
-      <div className="flex min-h-full w-full flex-col justify-between gap-4 px-10 py-5 lg:px-20">
+      <div className="flex h-full w-full flex-col justify-stretch gap-4 px-10 py-5 lg:px-20">
         <h1 className="text-2xl md:text-3xl lg:text-4xl">Recent community creations</h1>
         {sharedCreationsQuery.data?.sharedVariations.variations ? (
           <div className={`grid w-full grid-cols-2 gap-4 py-2 sm:grid-cols-4 lg:grid-cols-5 `}>
@@ -71,17 +71,11 @@ export const HallOfFame = () => {
             ))}
           </div>
         ) : (
-          <div className="flex min-h-full w-full flex-col items-center justify-center gap-4 text-xl">
-            {sharedCreationsQuery.fetching ? (
-              <>
-                <Loader className="fill-secondary h-16 w-16 animate-spin text-gray-200" /> Loading...
-              </>
-            ) : (
-              'No Cheebs Generated'
-            )}
+          <div className="flex w-full flex-col items-center justify-center gap-4 pt-20 text-xl">
+            {sharedCreationsQuery.fetching ? <CheebsLoader /> : 'No Cheebs Generated'}
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
