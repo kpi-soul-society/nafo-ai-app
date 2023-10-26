@@ -63,7 +63,10 @@ export const CommonFooter = ({ linkPreset = [] }: FooterProps) => {
           </div>
         </div>
 
-        <div className="flex w-1/3 justify-end">
+        <div className="flex w-1/3 flex-col items-end gap-4 sm:justify-end">
+          <Link className="relative h-8 w-32 md:h-12 md:w-48" href="https://github.com/kpi-soul-society/nafo-ai-app">
+            <Image src="/assets/github_icon.png" fill alt="GitHub" />
+          </Link>
           <Link className="relative h-10 w-28 md:h-16 md:w-48" href="https://fondy.ua">
             <Image src="/assets/fondy-processed-light.png" fill alt="Fondy" />
           </Link>
