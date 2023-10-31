@@ -28,9 +28,9 @@ export default function main(app: sst.App) {
     tracing: ['prod', 'dev'].includes(app.stage) ? 'active' : 'disabled',
   });
 
-  // if (app.stage !== 'prod') {
-  app.setDefaultRemovalPolicy(RemovalPolicy.DESTROY);
-  // }
+  if (app.stage !== 'prod') {
+    app.setDefaultRemovalPolicy(RemovalPolicy.DESTROY);
+  }
 
   app
     .stack(Network)

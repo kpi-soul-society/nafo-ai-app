@@ -2,6 +2,7 @@
 
 [![Seed Status](https://api.seed.run/dizzzmas/nafo-legion/stages/prod/build_badge)](https://console.seed.run/dizzzmas/nafo-legion)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+![Work In Progress](https://img.shields.io/badge/Work%20In%20Progress-orange?style=for-the-badge)
 
 </div>
 
