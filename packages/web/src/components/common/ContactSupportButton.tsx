@@ -65,8 +65,8 @@ export const ContactSupportButton = ({ bg = 'bg-yield' }) => {
               <h1 className="text-4xl font-bold">Contact Support</h1>
               <span>
                 Hit us up at&nbsp;
-                <a className="text-blue-600 underline hover:text-blue-800" href="mailto:contact@nafoai.com">
-                  contact@nafoai.com
+                <a className="text-blue-600 underline hover:text-blue-800" href="mailto:dizzzmas.nafo@gmail.com">
+                  dizzzmas.nafo@gmail.com
                 </a>
                 &nbsp;or use the form below.
               </span>

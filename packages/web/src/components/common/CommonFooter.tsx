@@ -73,7 +73,7 @@ export const CommonFooter = ({ linkPreset = [] }: FooterProps) => {
         </div>
       </div>
       <div className="2xs:text-md flex flex-auto flex-col items-end justify-end gap-y-2 text-xs underline md:text-xl lg:flex-row lg:gap-x-3 2xl:text-2xl">
-        <a href="mailto:contact@nafoai.com">Contacts us</a>
+        <a href="mailto:dizzzmas.nafo@gmail.com">Contacts us</a>
         <a href="/terms">Terms of Service</a>
         <a href="/privacy">Privacy Policy</a>
       </div>

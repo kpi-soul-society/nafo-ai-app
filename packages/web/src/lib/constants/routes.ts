@@ -16,4 +16,4 @@ export const HOW_IT_WORKS_ANCHOR = `/#${HOW_IT_WORKS_ID}`;
 export const ABOUT_NAFO_ANCHOR = `/#${ABOUT_NAFO_ID}`;
 
 export const NAFO_ORIGINAL = 'https://nafo-ofan.org/';
-export const MAIL_TO = 'mailto:contact@nafoai.com';
+export const MAIL_TO = 'mailto:dizzzmas.nafo@gmail.com';
