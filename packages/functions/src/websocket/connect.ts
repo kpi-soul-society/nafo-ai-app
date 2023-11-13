@@ -1,6 +1,7 @@
 import { DynamoDBClient, PutItemCommand, PutItemCommandInput } from '@aws-sdk/client-dynamodb';
 import { APIGatewayEventRequestContextWithAuthorizer, APIGatewayProxyHandler } from 'aws-lambda';
 import { defaultLambdaMiddleware } from 'src/middleware/lambda';
+import { logger } from 'src/util/logger';
 import { Table } from 'sst/node/table';
 
 import { AuthorizerContext } from './types';
@@ -8,13 +9,14 @@ import { AuthorizerContext } from './types';
 const dynamoDb = new DynamoDBClient({});
 
 const main: APIGatewayProxyHandler = async (event) => {
-  const { authorizer } = event.requestContext as APIGatewayEventRequestContextWithAuthorizer<AuthorizerContext>;
+  const { authorizer, connectionId } =
+    event.requestContext as APIGatewayEventRequestContextWithAuthorizer<AuthorizerContext>;
 
   const params: PutItemCommandInput = {
     TableName: Table.WebsocketConnections.tableName,
     Item: {
       id: {
-        S: event.requestContext.connectionId as string,
+        S: connectionId as string,
       },
       userId: {
         S: authorizer.userId,
@@ -24,6 +26,11 @@ const main: APIGatewayProxyHandler = async (event) => {
   const command = new PutItemCommand(params);
 
   await dynamoDb.send(command);
+
+  logger.info(`New websocket connection ${connectionId} for user ${authorizer.userId} created`, {
+    connectionId,
+    userId: authorizer.userId,
+  });
 
   return { statusCode: 200, body: 'Connected' };
 };

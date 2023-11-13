@@ -26,9 +26,12 @@ export const sendWebsocketMessageToUser = async <T>(userId: string, message: T) 
   };
   const command = new ScanCommand(input);
   const userWebsocketConnections = (await dynamoDb.send(command)).Items?.map((item) => item.id.S) as string[];
+  logger.info(`Found ${userWebsocketConnections.length} websocket connections for user ${userId}`, {
+    userWebsocketConnections,
+  });
 
   const results = await Promise.all(
-    userWebsocketConnections.map((c) => postToUserWebSocketConnection(c, userId, message))
+    userWebsocketConnections.map(async (c) => await postToUserWebSocketConnection(c, userId, message))
   );
   const deliveredMessageStatusCodes = results.filter((r) => {
     return r;
