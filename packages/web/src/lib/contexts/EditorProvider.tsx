@@ -56,9 +56,8 @@ export const EditorProvider = ({ children }: React.PropsWithChildren) => {
   const formMethods = useForm<ClientCreationGenerationSchema>({
     defaultValues: {
       startingImage: undefined,
-      iterationCount: 60,
-      quality: STAGE === 'prod' ? 3 : 1,
-      variationCount: STAGE === 'prod' ? 4 : 1,
+      iterationCount: STAGE === 'prod' ? 40 : 20,
+      variationCount: 4,
       textPrompt: undefined,
       selectedStyles: undefined,
     },
@@ -68,7 +67,6 @@ export const EditorProvider = ({ children }: React.PropsWithChildren) => {
       } else {
         data.startingImage = undefined;
       }
-      data.iterationCount = data.quality * 20;
 
       return zodResolver(clientSideCreationGenerationSchema)(data, context, options);
     },

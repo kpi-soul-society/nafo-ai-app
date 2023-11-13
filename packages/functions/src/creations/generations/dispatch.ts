@@ -13,10 +13,23 @@ import { logger } from 'src/util/logger';
 import { metrics } from 'src/util/metrics';
 import { tracer } from 'src/util/tracer';
 import { ApiHandler, Response } from 'sst/node/api';
-import { useSession } from 'sst/node/auth';
+import { SessionValue, useSession } from 'sst/node/auth';
 
 const dispatchCreationGeneration = ApiHandler(async (event: APIGatewayProxyEventV2) => {
-  const session = useSession();
+  let session: SessionValue;
+  // TODO: make it reusable for other API handlers
+  try {
+    session = useSession();
+  } catch (error: any) {
+    if (error.code === 'FAST_JWT_MALFORMED' || error.code === 'FAST_JWT_EXPIRED') {
+      throw new Response({
+        statusCode: 401,
+        body: JSON.stringify({ error: 'Unauthorized' }),
+      });
+    } else {
+      throw error;
+    }
+  }
 
   if (session.type !== 'user') {
     throw new Response({

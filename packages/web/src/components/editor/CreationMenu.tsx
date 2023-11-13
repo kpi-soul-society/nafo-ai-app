@@ -17,7 +17,6 @@ import { useScrollTooltip } from '@/lib/hooks/useScrollTooltip';
 
 import { AsyncButton } from '../common/AsyncButton';
 import { CommonSwitch } from '../common/CommonSwitch';
-import { RangeSlider } from '../common/RangeSlider';
 import { Cheebs } from '../images/Cheebs';
 
 import { DropdownMenu } from './DropdownMenu';
@@ -39,10 +38,8 @@ export const CreationMenu = () => {
     isNegativePropmptVisible,
     setIsNegativePropmptVisible,
     randomizePrompt,
-    quality,
-    setQuality,
-    variations,
-    setVariations,
+    iterationCount,
+    setIterationCount,
   } = useEditorFormContext();
   const formMethods = useFormContext();
   const { errors } = formMethods.formState;
@@ -103,7 +100,7 @@ export const CreationMenu = () => {
     >
       <form onSubmit={formMethods.handleSubmit(onSubmit as SubmitHandler<FieldValues>)}>
         <div id="main-editor" className={`flex h-full w-full flex-col gap-y-2`}>
-          <TextPromptSubmitter id="textPrompt" placeholder="Describe the image to generate" />
+          <TextPromptSubmitter id="textPrompt" placeholder="Describe how your fella looks" />
           <button
             onClick={randomizePrompt}
             type="button"
@@ -137,19 +134,34 @@ export const CreationMenu = () => {
           />
           <StartingImagePicker />
           <DropdownMenu id="advancedSettings" label="Advanced Settings" open={open} addItem={addItem}>
-            <div id="iterations-quantity-selector">
-              <span>Quality of image</span>
-              <RangeSlider name="quality" min={1} max={5} rangeValue={quality} setRangeValue={setQuality} />
-            </div>
-            <div id="variations-quantity-selector">
-              <span>Number of variations</span>
-              <RangeSlider
-                name="variationCount"
-                min={1}
-                max={4}
-                rangeValue={variations}
-                setRangeValue={setVariations}
-              />
+            <div id="iterations-quantity-selector" className="flex flex-col">
+              <span>Image quality preference</span>
+              <div className="flex gap-x-2">
+                <button
+                  type="button"
+                  className={`${
+                    iterationCount === 20 ? 'bg-secondary' : 'bg-gray-400'
+                  } my-2 w-full rounded-md px-3 py-2 text-lg font-semibold text-white shadow-sm hover:cursor-pointer hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+                  onClick={() => {
+                    setIterationCount(20);
+                    formMethods.setValue('iterationCount', 20);
+                  }}
+                >
+                  Speed
+                </button>
+                <button
+                  type="button"
+                  className={`${
+                    iterationCount === 40 ? 'bg-secondary' : 'bg-gray-400'
+                  } my-2 w-full rounded-md px-3 py-2 text-lg font-semibold text-white shadow-sm hover:cursor-pointer hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+                  onClick={() => {
+                    setIterationCount(40);
+                    formMethods.setValue('iterationCount', 40);
+                  }}
+                >
+                  Quality
+                </button>
+              </div>
             </div>
           </DropdownMenu>
           <div

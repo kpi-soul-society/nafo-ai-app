@@ -13,8 +13,8 @@ const baseCreationGenerationSchema = z.object({
   iterationCount: z.coerce
     .number()
     .gte(20, 'Number of iterations should be at least 20')
-    .lte(100, 'Number of iterations should be at most 100')
-    .default(50),
+    .lte(40, 'Number of iterations should be at most 40')
+    .default(40),
   variationCount: z.coerce
     .number()
     .gte(1, 'Number of variations should be at least 1')
@@ -27,8 +27,6 @@ const baseCreationGenerationSchema = z.object({
       if (t) {
         // eslint-disable-next-line no-useless-escape
         const regex = /^[\s\n~`!@#$%^&*()_+=[\]\{}|;':",.\/<>?a-zA-Z0-9-]+$/;
-        console.log(t);
-        console.log(regex.test(t));
         return regex.test(t);
       }
       return true;
@@ -47,7 +45,6 @@ const baseCreationGenerationSchema = z.object({
 
 export const clientSideCreationGenerationSchema = baseCreationGenerationSchema
   .extend({
-    quality: z.number().lte(10).default(1),
     startingImage: z
       .any()
       .refine(

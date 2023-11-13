@@ -23,8 +23,8 @@ export interface EditorForm {
   isNegativePropmptVisible: boolean;
   setIsNegativePropmptVisible: (_: boolean) => void;
   randomizePrompt: () => void;
-  quality: number;
-  setQuality: (_: number) => void;
+  iterationCount: number;
+  setIterationCount: (_: number) => void;
   variations: number;
   setVariations: (_: number) => void;
 }
@@ -55,10 +55,10 @@ const intialValues: EditorForm = {
   setIsNegativePropmptVisible: () => {},
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   randomizePrompt: () => {},
-  quality: STAGE === 'prod' ? 3 : 1,
+  iterationCount: STAGE === 'prod' ? 40 : 20,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setQuality: () => {},
-  variations: STAGE === 'prod' ? 4 : 1,
+  setIterationCount: () => {},
+  variations: 4,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setVariations: () => {},
 };
@@ -69,8 +69,8 @@ export const EditorFormProvider = ({ children }: React.PropsWithChildren) => {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [isPublic, setIsPublic] = useState(false);
   const [isNegativePropmptVisible, setIsNegativePropmptVisible] = useState(false);
-  const [quality, setQuality] = useState(STAGE === 'prod' ? 3 : 1);
-  const [variations, setVariations] = useState(STAGE === 'prod' ? 4 : 1);
+  const [iterationCount, setIterationCount] = useState(STAGE === 'prod' ? 40 : 20);
+  const [variations, setVariations] = useState(4);
   const {
     selectedItems: selectedStyles,
     handleItemClick: selectStyle,
@@ -117,7 +117,7 @@ export const EditorFormProvider = ({ children }: React.PropsWithChildren) => {
   };
 
   useEffect(() => {
-    if (sessionStorage !== undefined) {
+    if (typeof window !== 'undefined') {
       const storedEvolveItem = sessionStorage.getItem('evolveItem') ?? '';
       const storedImageToImage = sessionStorage.getItem('imageToImage') ?? '';
 
@@ -161,8 +161,8 @@ export const EditorFormProvider = ({ children }: React.PropsWithChildren) => {
         isNegativePropmptVisible,
         setIsNegativePropmptVisible,
         randomizePrompt,
-        quality,
-        setQuality,
+        iterationCount,
+        setIterationCount,
         variations,
         setVariations,
       }}
