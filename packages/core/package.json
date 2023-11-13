@@ -16,6 +16,7 @@
     "vitest": "^0.28.4"
   },
   "dependencies": {
+    "@2toad/profanity": "^2.2.0",
     "@aws-sdk/client-s3": "^3.312.0",
     "@aws-sdk/client-sqs": "^3.312.0",
     "@aws-sdk/s3-request-presigner": "^3.312.0",

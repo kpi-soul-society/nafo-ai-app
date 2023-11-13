@@ -1,3 +1,4 @@
+import { profanity } from '@2toad/profanity';
 import { z } from 'zod';
 
 import { paginationSchema } from './common';
@@ -19,7 +20,25 @@ const baseCreationGenerationSchema = z.object({
     .gte(1, 'Number of variations should be at least 1')
     .lte(4, 'Number of variations should be at most 4')
     .default(4),
-  textPrompt: z.string().nullish(),
+  textPrompt: z
+    .string()
+    .nullish()
+    .refine((t) => {
+      if (t) {
+        // eslint-disable-next-line no-useless-escape
+        const regex = /^[\s\n~`!@#$%^&*()_+=[\]\{}|;':",.\/<>?a-zA-Z0-9-]+$/;
+        console.log(t);
+        console.log(regex.test(t));
+        return regex.test(t);
+      }
+      return true;
+    }, 'The prompt allows only English, numbers and special characters')
+    .refine((t) => {
+      if (t) {
+        return !profanity.exists(t);
+      }
+      return true;
+    }, 'No NSFW prompts allowed'),
   selectedStyles: z.array(style).nullish(),
   startingImageUrl: z.string().nullish(),
   parentCreationId: z.string().nullish(),
