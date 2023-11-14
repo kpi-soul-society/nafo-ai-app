@@ -58,7 +58,7 @@ const intialValues: EditorForm = {
   iterationCount: STAGE === 'prod' ? 40 : 20,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setIterationCount: () => {},
-  variations: 4,
+  variations: STAGE === 'prod' ? 4 : 1,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setVariations: () => {},
 };
@@ -70,7 +70,7 @@ export const EditorFormProvider = ({ children }: React.PropsWithChildren) => {
   const [isPublic, setIsPublic] = useState(false);
   const [isNegativePropmptVisible, setIsNegativePropmptVisible] = useState(false);
   const [iterationCount, setIterationCount] = useState(STAGE === 'prod' ? 40 : 20);
-  const [variations, setVariations] = useState(4);
+  const [variations, setVariations] = useState(STAGE === 'prod' ? 4 : 1);
   const {
     selectedItems: selectedStyles,
     handleItemClick: selectStyle,

@@ -57,7 +57,7 @@ export const EditorProvider = ({ children }: React.PropsWithChildren) => {
     defaultValues: {
       startingImage: undefined,
       iterationCount: STAGE === 'prod' ? 40 : 20,
-      variationCount: 4,
+      variationCount: STAGE === 'prod' ? 4 : 1,
       textPrompt: undefined,
       selectedStyles: undefined,
     },

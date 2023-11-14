@@ -17,6 +17,7 @@ import { useScrollTooltip } from '@/lib/hooks/useScrollTooltip';
 
 import { AsyncButton } from '../common/AsyncButton';
 import { CommonSwitch } from '../common/CommonSwitch';
+import { RangeSlider } from '../common/RangeSlider';
 import { Cheebs } from '../images/Cheebs';
 
 import { DropdownMenu } from './DropdownMenu';
@@ -40,6 +41,8 @@ export const CreationMenu = () => {
     randomizePrompt,
     iterationCount,
     setIterationCount,
+    variations,
+    setVariations,
   } = useEditorFormContext();
   const formMethods = useFormContext();
   const { errors } = formMethods.formState;
@@ -162,6 +165,16 @@ export const CreationMenu = () => {
                   Quality
                 </button>
               </div>
+            </div>
+            <div id="variations-quantity-selector">
+              <span>Number of variations</span>
+              <RangeSlider
+                name="variationCount"
+                min={1}
+                max={4}
+                rangeValue={variations}
+                setRangeValue={setVariations}
+              />
             </div>
           </DropdownMenu>
           <div
