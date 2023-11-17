@@ -26,7 +26,7 @@ export const CreationMenu = () => {
   const { data: session } = useSession();
   const [styles] = useTypedQuery({
     query: {
-      styles: { id: true, name: true, imageUrl: true, prompt: true },
+      styles: { id: true, name: true, imageUrl: true, prompt: true, negativePrompt: true },
     },
   });
   const { isLoading, isMenuOpen, creations, tokenNumber = 0, setPage, reloadCreations, page } = useEditorContext();

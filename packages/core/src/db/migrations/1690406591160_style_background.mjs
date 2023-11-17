@@ -13,6 +13,7 @@ export async function up(db) {
     .addColumn('name', 'varchar(100)', (col) => col.notNull().unique())
     .addColumn('imageUrl', 'varchar(300)', (col) => col.notNull())
     .addColumn('prompt', 'text', (col) => col.notNull())
+    .addColumn('negativePrompt', 'text', (col) => col.notNull())
     .execute();
 
   // CreationStyle

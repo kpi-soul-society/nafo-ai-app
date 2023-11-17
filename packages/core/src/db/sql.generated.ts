@@ -50,6 +50,7 @@ export interface Style {
   name: string;
   imageUrl: string;
   prompt: string;
+  negativePrompt: string;
 }
 
 export interface SupportRequest {

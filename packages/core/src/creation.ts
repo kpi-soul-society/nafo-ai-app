@@ -201,6 +201,13 @@ export async function dispatchCreationGeneration(payload: ServerCreationGenerati
       await trx.insertInto('creationStyle').values(insertCreationStyleConnectionsPayload).execute();
     }
 
+    if (selectedStyles?.length) {
+      const negativePrompt = payload.negativePrompt?.length
+        ? `${payload.negativePrompt} ${selectedStyles[0].negativePrompt}`
+        : selectedStyles[0].negativePrompt;
+      await trx.updateTable('creation').set({ negativePrompt }).where('creation.id', '=', creation.id).execute();
+    }
+
     // Insert variations into the DB, so that we have the ids to use for the S3 keys
     const variationPayloads: InsertObject<DB, 'variation'>[] = [];
     for (let i = 0; i < payload.variationCount; i++) {

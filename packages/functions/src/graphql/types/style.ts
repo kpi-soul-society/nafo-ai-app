@@ -10,6 +10,7 @@ export const StyleType = builder.objectRef<SQL.Row['style']>('Style').implement(
     name: t.exposeString('name'),
     imageUrl: t.exposeString('imageUrl'),
     prompt: t.exposeString('prompt'),
+    negativePrompt: t.exposeString('negativePrompt'),
     createdAt: t.field({
       type: 'String',
       resolve: (style) => style.createdAt.toISOString(),

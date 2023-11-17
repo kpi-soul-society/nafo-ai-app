@@ -79,6 +79,7 @@ type Style {
   id: ID!
   imageUrl: String!
   name: String!
+  negativePrompt: String!
   prompt: String!
   updatedAt: String
 }

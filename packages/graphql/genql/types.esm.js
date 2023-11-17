@@ -285,6 +285,9 @@ export default {
             "name": [
                 1
             ],
+            "negativePrompt": [
+                1
+            ],
             "prompt": [
                 1
             ],

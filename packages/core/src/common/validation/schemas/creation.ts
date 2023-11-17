@@ -7,6 +7,7 @@ const style = z.object({
   id: z.string(),
   name: z.string(),
   prompt: z.string(),
+  negativePrompt: z.string(),
 });
 
 const baseCreationGenerationSchema = z.object({
