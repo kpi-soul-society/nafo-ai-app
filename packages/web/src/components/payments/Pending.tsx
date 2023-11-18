@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import { useTypedQuery } from '@/lib/client/graphqlClient';
-import useSocketData from '@/lib/hooks/useSocketData';
+import { useWebSocketContext } from '@/lib/contexts/WebSocketProvider';
 
 export const PendingPayment = ({ orderId }: Props) => {
   const [tokenAcquistionQuery, refetchTokenAcquistions] = useTypedQuery({
@@ -18,7 +18,7 @@ export const PendingPayment = ({ orderId }: Props) => {
       ],
     },
   });
-  const { socketData } = useSocketData() as SocketData;
+  const { socketData } = useWebSocketContext() as SocketData;
   const router = useRouter();
 
   const handleWebsocketPaymentStatusUpdate = useCallback(() => {

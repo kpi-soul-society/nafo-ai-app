@@ -21,6 +21,7 @@ export function WebsocketApi({ stack, app }: StackContext) {
     },
     routes: {
       $connect: 'packages/functions/src/websocket/connect.handler',
+      $default: 'packages/functions/src/websocket/default.handler',
       $disconnect: 'packages/functions/src/websocket/disconnect.handler',
       sendMessage: 'packages/functions/src/websocket/send-message.handler',
     },
@@ -30,6 +31,8 @@ export function WebsocketApi({ stack, app }: StackContext) {
         }
       : undefined,
   });
+
+  wsApi.bind([wsApi]);
 
   stack.addOutputs({
     WebsocketApiUrl: wsApi.customDomainUrl || wsApi.url,

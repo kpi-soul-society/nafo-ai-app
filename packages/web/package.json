@@ -34,11 +34,11 @@
     "react-hot-toast": "^2.4.1",
     "react-popper": "^2.3.0",
     "react-use-downloader": "^1.2.4",
+    "react-use-websocket": "^4.5.0",
     "tailwindcss": "3.3.2",
     "typescript": "5.0.4",
     "wonka": "^6.3.4",
-    "zod": "^3.21.4",
-    "zustand": "^4.3.7"
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^13.4.19",

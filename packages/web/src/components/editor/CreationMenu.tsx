@@ -12,6 +12,7 @@ import { useTypedQuery } from '@/lib/client/graphqlClient';
 import { REST_ENDPOINT } from '@/lib/config/next';
 import { useEditorFormContext } from '@/lib/contexts/EditorFormProvider';
 import { useEditorContext } from '@/lib/contexts/EditorProvider';
+import { useWebSocketContext } from '@/lib/contexts/WebSocketProvider';
 import { useMenuListControls } from '@/lib/hooks/useMenuListControls';
 import { useScrollTooltip } from '@/lib/hooks/useScrollTooltip';
 
@@ -24,6 +25,7 @@ import { DropdownMenu } from './DropdownMenu';
 
 export const CreationMenu = () => {
   const { data: session } = useSession();
+  const { reconnectWebSocket } = useWebSocketContext();
   const [styles] = useTypedQuery({
     query: {
       styles: { id: true, name: true, imageUrl: true, prompt: true, negativePrompt: true },
@@ -49,6 +51,7 @@ export const CreationMenu = () => {
   const error = Object.values(errors)[0]?.message;
 
   const onSubmit = async (data: ClientCreationGenerationSchema) => {
+    reconnectWebSocket && reconnectWebSocket();
     const formData = new FormData();
     formData.append('payload', JSON.stringify(data));
     if (imageFile) {

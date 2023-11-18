@@ -13,7 +13,7 @@ import { useTypedMutation } from '@/lib/client/graphqlClient';
 import { CarouselProvider } from '@/lib/contexts/CarouselProvider';
 import { useEditorFormContext } from '@/lib/contexts/EditorFormProvider';
 import { EditorVariation, useEditorContext } from '@/lib/contexts/EditorProvider';
-import useSocketData from '@/lib/hooks/useSocketData';
+import { useWebSocketContext } from '@/lib/contexts/WebSocketProvider';
 
 import { ModalDialog } from '../common/ModalDialog';
 import { emptyDogPlaceholder } from '../images/EmptyDog';
@@ -43,7 +43,7 @@ export const GalleryItem = ({
 }: GalleryItemProps) => {
   const [image, setImage] = useState(isImageReady ? imageUrl : null);
   const [isImageLoading, setIsImageLoading] = useState(true);
-  const { socketData } = useSocketData() as { socketData: CreationCompletionStatusUpdatedEventSchema };
+  const { socketData } = useWebSocketContext() as { socketData: CreationCompletionStatusUpdatedEventSchema };
 
   const handleCreationStatusUpdate = useCallback(() => {
     if (socketData && socketData.actionType === 'GENERATION_COMPLETE') {

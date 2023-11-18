@@ -40,11 +40,12 @@ export const sendWebsocketMessageToUser = async <T>(userId: string, message: T) 
   return deliveredMessageStatusCodes;
 };
 
-const postToUserWebSocketConnection = async function (connectionId: string, userId: string, message: unknown) {
+export const postToUserWebSocketConnection = async function (connectionId: string, userId: string, message: unknown) {
   try {
+    const data = typeof message === 'string' ? message : JSON.stringify(message);
     const command = new PostToConnectionCommand({
       ConnectionId: connectionId,
-      Data: JSON.stringify(message) as unknown as Uint8Array,
+      Data: data as unknown as Uint8Array,
     });
     // Send the message to the given client
     const res = await apiG.send(command);
