@@ -55,7 +55,7 @@ const intialValues: EditorForm = {
   setIsNegativePropmptVisible: () => {},
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   randomizePrompt: () => {},
-  iterationCount: STAGE === 'prod' ? 40 : 20,
+  iterationCount: 20,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setIterationCount: () => {},
   variations: STAGE === 'prod' ? 4 : 1,

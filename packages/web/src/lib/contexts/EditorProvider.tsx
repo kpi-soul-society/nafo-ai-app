@@ -56,7 +56,7 @@ export const EditorProvider = ({ children }: React.PropsWithChildren) => {
   const formMethods = useForm<ClientCreationGenerationSchema>({
     defaultValues: {
       startingImage: undefined,
-      iterationCount: STAGE === 'prod' ? 40 : 20,
+      iterationCount: 20,
       variationCount: STAGE === 'prod' ? 4 : 1,
       textPrompt: undefined,
       selectedStyles: undefined,
