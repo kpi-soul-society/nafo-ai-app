@@ -33,6 +33,15 @@ export interface Creation {
   parentCreationId: string | null;
   deletedAt: Date | null;
   negativePrompt: string | null;
+  modeId: string;
+}
+
+export interface CreationMode {
+  id: string;
+  createdAt: Generated<Date>;
+  updatedAt: Generated<Date>;
+  name: string;
+  imageUrl: string | null;
 }
 
 export interface CreationStyle {
@@ -133,6 +142,7 @@ export interface Variation {
 
 export interface DB {
   creation: Creation;
+  creationMode: CreationMode;
   creationStyle: CreationStyle;
   style: Style;
   supportRequest: SupportRequest;

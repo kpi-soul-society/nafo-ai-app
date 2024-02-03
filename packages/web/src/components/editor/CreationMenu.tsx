@@ -1,8 +1,10 @@
+import { useEffect, useState } from 'react';
 import { FieldValues, SubmitHandler, useFormContext } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { ArrowDownCircleIcon } from '@heroicons/react/24/outline';
 import { SparklesIcon } from '@heroicons/react/24/solid';
 import { ClientCreationGenerationSchema } from '@nafo-ai/core/common/validation';
+import Image from 'next/image';
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 
@@ -20,6 +22,7 @@ import { AsyncButton } from '../common/AsyncButton';
 import { CommonSwitch } from '../common/CommonSwitch';
 import { RangeSlider } from '../common/RangeSlider';
 import { Cheebs } from '../images/Cheebs';
+import { emptyDogPlaceholder } from '../images/EmptyDog';
 
 import { DropdownMenu } from './DropdownMenu';
 
@@ -31,6 +34,23 @@ export const CreationMenu = () => {
       styles: { id: true, name: true, imageUrl: true, prompt: true, negativePrompt: true },
     },
   });
+  const [creationModes] = useTypedQuery({
+    query: {
+      creationModes: { id: true, name: true, imageUrl: true },
+    },
+  });
+  const [creationModeId, setCreationModeId] = useState(
+    creationModes?.data?.creationModes.find((m) => m.name === 'avatar')?.id
+  );
+
+  useEffect(() => {
+    if (!creationModeId) {
+      const modeId = creationModes?.data?.creationModes.find((m) => m.name === 'avatar')?.id;
+      setCreationModeId(modeId);
+      formMethods.setValue('modeId', modeId);
+    }
+  }, [creationModes.data]);
+
   const { isLoading, isMenuOpen, creations, tokenNumber = 0, setPage, reloadCreations, page } = useEditorContext();
   const {
     clearStyles,
@@ -128,6 +148,38 @@ export const CreationMenu = () => {
           <div className={`${isNegativePropmptVisible ? 'flex' : 'hidden'}`}>
             <TextPromptSubmitter id="negativePrompt" placeholder="Describe what to remove from the image" />
           </div>
+          <DropdownMenu id="creationMode" label="Mode" open={open} addItem={addItem}>
+            <div className="grid grid-cols-3 justify-items-center gap-2">
+              {creationModes.data?.creationModes?.map((item) => (
+                <div
+                  key={item.id}
+                  onClick={() => {
+                    formMethods.setValue('modeId', item.id);
+                    setCreationModeId(item.id);
+                  }}
+                  className="hover:text-secondary relative flex flex-col items-center rounded-lg hover:cursor-pointer"
+                >
+                  <div
+                    className={`relative top-0 aspect-square w-full min-w-[5rem] overflow-hidden rounded-md ${
+                      item.id === creationModeId ? 'border-secondary border-4' : 'hover:scale-110'
+                    }`}
+                    key={item.imageUrl}
+                  >
+                    <Image
+                      src={item.imageUrl!}
+                      alt="NAFO dog"
+                      priority
+                      fill
+                      placeholder="blur"
+                      blurDataURL={emptyDogPlaceholder}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                  </div>
+                  <span className="text-sm font-semibold">{item.name}</span>
+                </div>
+              ))}
+            </div>
+          </DropdownMenu>
           <DropdownMenu
             id="selectedStyles"
             label="Styles"

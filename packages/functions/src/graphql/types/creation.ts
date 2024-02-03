@@ -27,6 +27,7 @@ const CreationType = builder.objectRef<SQL.Row['creation']>('Creation').implemen
     startingImageUrl: t.exposeString('startingImageUrl', { nullable: true }),
     negativePrompt: t.exposeString('negativePrompt', { nullable: true }),
     parentCreationId: t.exposeString('parentCreationId', { nullable: true }),
+    modeId: t.exposeString('modeId', { nullable: true }),
     completionStatus: t.field({
       type: CreationCompletionStatusType,
       resolve: (creation) => creation.completionStatus,

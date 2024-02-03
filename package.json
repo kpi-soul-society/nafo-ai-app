@@ -23,7 +23,7 @@
     "clean": "tsc -b --clean && rm -rf .build .sst dist && pnpm run --recursive --if-present clean"
   },
   "devDependencies": {
-    "@aws-cdk/aws-apigatewayv2-alpha": "^2.101.1-alpha.0",
+    "@aws-cdk/aws-apigatewayv2-alpha": "^2.110.1-alpha.0",
     "@tsconfig/node18": "^1.0.1",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",

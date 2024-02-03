@@ -18,6 +18,7 @@ export interface Creation {
     createdAt: Scalars['String']
     id: Scalars['ID']
     iterationCount: Scalars['Int']
+    modeId?: Scalars['String']
     negativePrompt?: Scalars['String']
     parentCreationId?: Scalars['String']
     resultImageUrl?: Scalars['String']
@@ -31,6 +32,15 @@ export interface Creation {
 }
 
 export type CreationCompletionStatus = 'COMPLETED' | 'IN_PROGRESS' | 'PENDING'
+
+export interface CreationMode {
+    createdAt?: Scalars['String']
+    id: Scalars['ID']
+    imageUrl?: Scalars['String']
+    name: Scalars['String']
+    updatedAt?: Scalars['String']
+    __typename?: 'CreationMode'
+}
 
 export type Currency = 'EUR' | 'UAH' | 'USD'
 
@@ -72,6 +82,7 @@ export interface PaginatedVariations {
 
 export interface Query {
     creation: Creation
+    creationModes: CreationMode[]
     me: User
     myCreations: PaginatedCreations
     myStats: UserStats
@@ -174,6 +185,7 @@ export interface CreationRequest{
     createdAt?: boolean | number
     id?: boolean | number
     iterationCount?: boolean | number
+    modeId?: boolean | number
     negativePrompt?: boolean | number
     parentCreationId?: boolean | number
     resultImageUrl?: boolean | number
@@ -183,6 +195,16 @@ export interface CreationRequest{
     updatedAt?: boolean | number
     variationCount?: boolean | number
     variations?: VariationRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+export interface CreationModeRequest{
+    createdAt?: boolean | number
+    id?: boolean | number
+    imageUrl?: boolean | number
+    name?: boolean | number
+    updatedAt?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -229,6 +251,7 @@ export interface PaginatedVariationsRequest{
 
 export interface QueryRequest{
     creation?: [{creationId: Scalars['String']},CreationRequest]
+    creationModes?: CreationModeRequest
     me?: UserRequest
     myCreations?: [{limit?: (Scalars['Int'] | null),page?: (Scalars['Int'] | null)},PaginatedCreationsRequest] | PaginatedCreationsRequest
     myStats?: UserStatsRequest
@@ -341,6 +364,14 @@ export const isCreation = (obj?: { __typename?: any } | null): obj is Creation =
 
 
 
+const CreationMode_possibleTypes = ['CreationMode']
+export const isCreationMode = (obj?: { __typename?: any } | null): obj is CreationMode => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isCreationMode"')
+  return CreationMode_possibleTypes.includes(obj.__typename)
+}
+
+
+
 const CurrencyToTotalDonation_possibleTypes = ['CurrencyToTotalDonation']
 export const isCurrencyToTotalDonation = (obj?: { __typename?: any } | null): obj is CurrencyToTotalDonation => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isCurrencyToTotalDonation"')
@@ -440,9 +471,13 @@ export interface CheckoutSessionPromiseChain{checkoutUrl:({get:(request?:boolean
 
 export interface CheckoutSessionObservableChain{checkoutUrl:({get:(request?:boolean|number,defaultValue?:Scalars['String'])=>Observable<Scalars['String']>})}
 
-export interface CreationPromiseChain{completionStatus:({get:(request?:boolean|number,defaultValue?:CreationCompletionStatus)=>Promise<CreationCompletionStatus>}),createdAt:({get:(request?:boolean|number,defaultValue?:Scalars['String'])=>Promise<Scalars['String']>}),id:({get:(request?:boolean|number,defaultValue?:Scalars['ID'])=>Promise<Scalars['ID']>}),iterationCount:({get:(request?:boolean|number,defaultValue?:Scalars['Int'])=>Promise<Scalars['Int']>}),negativePrompt:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Promise<(Scalars['String'] | null)>}),parentCreationId:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Promise<(Scalars['String'] | null)>}),resultImageUrl:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Promise<(Scalars['String'] | null)>}),startingImageUrl:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Promise<(Scalars['String'] | null)>}),styles:({get: (request: StyleRequest, defaultValue?:Style[])=>Promise<Style[]>}),textPrompt:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Promise<(Scalars['String'] | null)>}),updatedAt:({get:(request?:boolean|number,defaultValue?:Scalars['String'])=>Promise<Scalars['String']>}),variationCount:({get:(request?:boolean|number,defaultValue?:Scalars['Int'])=>Promise<Scalars['Int']>}),variations:({get: (request: VariationRequest, defaultValue?:Variation[])=>Promise<Variation[]>})}
+export interface CreationPromiseChain{completionStatus:({get:(request?:boolean|number,defaultValue?:CreationCompletionStatus)=>Promise<CreationCompletionStatus>}),createdAt:({get:(request?:boolean|number,defaultValue?:Scalars['String'])=>Promise<Scalars['String']>}),id:({get:(request?:boolean|number,defaultValue?:Scalars['ID'])=>Promise<Scalars['ID']>}),iterationCount:({get:(request?:boolean|number,defaultValue?:Scalars['Int'])=>Promise<Scalars['Int']>}),modeId:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Promise<(Scalars['String'] | null)>}),negativePrompt:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Promise<(Scalars['String'] | null)>}),parentCreationId:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Promise<(Scalars['String'] | null)>}),resultImageUrl:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Promise<(Scalars['String'] | null)>}),startingImageUrl:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Promise<(Scalars['String'] | null)>}),styles:({get: (request: StyleRequest, defaultValue?:Style[])=>Promise<Style[]>}),textPrompt:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Promise<(Scalars['String'] | null)>}),updatedAt:({get:(request?:boolean|number,defaultValue?:Scalars['String'])=>Promise<Scalars['String']>}),variationCount:({get:(request?:boolean|number,defaultValue?:Scalars['Int'])=>Promise<Scalars['Int']>}),variations:({get: (request: VariationRequest, defaultValue?:Variation[])=>Promise<Variation[]>})}
 
-export interface CreationObservableChain{completionStatus:({get:(request?:boolean|number,defaultValue?:CreationCompletionStatus)=>Observable<CreationCompletionStatus>}),createdAt:({get:(request?:boolean|number,defaultValue?:Scalars['String'])=>Observable<Scalars['String']>}),id:({get:(request?:boolean|number,defaultValue?:Scalars['ID'])=>Observable<Scalars['ID']>}),iterationCount:({get:(request?:boolean|number,defaultValue?:Scalars['Int'])=>Observable<Scalars['Int']>}),negativePrompt:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Observable<(Scalars['String'] | null)>}),parentCreationId:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Observable<(Scalars['String'] | null)>}),resultImageUrl:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Observable<(Scalars['String'] | null)>}),startingImageUrl:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Observable<(Scalars['String'] | null)>}),styles:({get: (request: StyleRequest, defaultValue?:Style[])=>Observable<Style[]>}),textPrompt:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Observable<(Scalars['String'] | null)>}),updatedAt:({get:(request?:boolean|number,defaultValue?:Scalars['String'])=>Observable<Scalars['String']>}),variationCount:({get:(request?:boolean|number,defaultValue?:Scalars['Int'])=>Observable<Scalars['Int']>}),variations:({get: (request: VariationRequest, defaultValue?:Variation[])=>Observable<Variation[]>})}
+export interface CreationObservableChain{completionStatus:({get:(request?:boolean|number,defaultValue?:CreationCompletionStatus)=>Observable<CreationCompletionStatus>}),createdAt:({get:(request?:boolean|number,defaultValue?:Scalars['String'])=>Observable<Scalars['String']>}),id:({get:(request?:boolean|number,defaultValue?:Scalars['ID'])=>Observable<Scalars['ID']>}),iterationCount:({get:(request?:boolean|number,defaultValue?:Scalars['Int'])=>Observable<Scalars['Int']>}),modeId:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Observable<(Scalars['String'] | null)>}),negativePrompt:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Observable<(Scalars['String'] | null)>}),parentCreationId:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Observable<(Scalars['String'] | null)>}),resultImageUrl:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Observable<(Scalars['String'] | null)>}),startingImageUrl:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Observable<(Scalars['String'] | null)>}),styles:({get: (request: StyleRequest, defaultValue?:Style[])=>Observable<Style[]>}),textPrompt:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Observable<(Scalars['String'] | null)>}),updatedAt:({get:(request?:boolean|number,defaultValue?:Scalars['String'])=>Observable<Scalars['String']>}),variationCount:({get:(request?:boolean|number,defaultValue?:Scalars['Int'])=>Observable<Scalars['Int']>}),variations:({get: (request: VariationRequest, defaultValue?:Variation[])=>Observable<Variation[]>})}
+
+export interface CreationModePromiseChain{createdAt:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Promise<(Scalars['String'] | null)>}),id:({get:(request?:boolean|number,defaultValue?:Scalars['ID'])=>Promise<Scalars['ID']>}),imageUrl:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Promise<(Scalars['String'] | null)>}),name:({get:(request?:boolean|number,defaultValue?:Scalars['String'])=>Promise<Scalars['String']>}),updatedAt:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Promise<(Scalars['String'] | null)>})}
+
+export interface CreationModeObservableChain{createdAt:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Observable<(Scalars['String'] | null)>}),id:({get:(request?:boolean|number,defaultValue?:Scalars['ID'])=>Observable<Scalars['ID']>}),imageUrl:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Observable<(Scalars['String'] | null)>}),name:({get:(request?:boolean|number,defaultValue?:Scalars['String'])=>Observable<Scalars['String']>}),updatedAt:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Observable<(Scalars['String'] | null)>})}
 
 export interface CurrencyToTotalDonationPromiseChain{EUR:({get:(request?:boolean|number,defaultValue?:Scalars['Float'])=>Promise<Scalars['Float']>}),UAH:({get:(request?:boolean|number,defaultValue?:Scalars['Float'])=>Promise<Scalars['Float']>}),USD:({get:(request?:boolean|number,defaultValue?:Scalars['Float'])=>Promise<Scalars['Float']>})}
 
@@ -460,9 +495,9 @@ export interface PaginatedVariationsPromiseChain{lastPage:({get:(request?:boolea
 
 export interface PaginatedVariationsObservableChain{lastPage:({get:(request?:boolean|number,defaultValue?:Scalars['Int'])=>Observable<Scalars['Int']>}),limit:({get:(request?:boolean|number,defaultValue?:Scalars['Int'])=>Observable<Scalars['Int']>}),page:({get:(request?:boolean|number,defaultValue?:Scalars['Int'])=>Observable<Scalars['Int']>}),total:({get:(request?:boolean|number,defaultValue?:Scalars['Int'])=>Observable<Scalars['Int']>}),variations:({get: (request: VariationRequest, defaultValue?:Variation[])=>Observable<Variation[]>})}
 
-export interface QueryPromiseChain{creation:((args:{creationId: Scalars['String']})=>CreationPromiseChain & {get: (request: CreationRequest, defaultValue?:Creation)=>Promise<Creation>}),me:(UserPromiseChain & {get: (request: UserRequest, defaultValue?:User)=>Promise<User>}),myCreations:((args?:{limit?: (Scalars['Int'] | null),page?: (Scalars['Int'] | null)})=>PaginatedCreationsPromiseChain & {get: (request: PaginatedCreationsRequest, defaultValue?:PaginatedCreations)=>Promise<PaginatedCreations>})&(PaginatedCreationsPromiseChain & {get: (request: PaginatedCreationsRequest, defaultValue?:PaginatedCreations)=>Promise<PaginatedCreations>}),myStats:(UserStatsPromiseChain & {get: (request: UserStatsRequest, defaultValue?:UserStats)=>Promise<UserStats>}),sharedVariations:((args?:{limit?: (Scalars['Int'] | null),page?: (Scalars['Int'] | null)})=>PaginatedVariationsPromiseChain & {get: (request: PaginatedVariationsRequest, defaultValue?:PaginatedVariations)=>Promise<PaginatedVariations>})&(PaginatedVariationsPromiseChain & {get: (request: PaginatedVariationsRequest, defaultValue?:PaginatedVariations)=>Promise<PaginatedVariations>}),styles:({get: (request: StyleRequest, defaultValue?:Style[])=>Promise<Style[]>}),surprisePrompts:({get: (request: SurprisePromptRequest, defaultValue?:SurprisePrompt[])=>Promise<SurprisePrompt[]>}),tokenAcquisition:((args:{tokenAcquisitionId: Scalars['String']})=>TokenAcquisitionPromiseChain & {get: (request: TokenAcquisitionRequest, defaultValue?:TokenAcquisition)=>Promise<TokenAcquisition>}),user:((args:{id: Scalars['String']})=>UserPromiseChain & {get: (request: UserRequest, defaultValue?:User)=>Promise<User>})}
+export interface QueryPromiseChain{creation:((args:{creationId: Scalars['String']})=>CreationPromiseChain & {get: (request: CreationRequest, defaultValue?:Creation)=>Promise<Creation>}),creationModes:({get: (request: CreationModeRequest, defaultValue?:CreationMode[])=>Promise<CreationMode[]>}),me:(UserPromiseChain & {get: (request: UserRequest, defaultValue?:User)=>Promise<User>}),myCreations:((args?:{limit?: (Scalars['Int'] | null),page?: (Scalars['Int'] | null)})=>PaginatedCreationsPromiseChain & {get: (request: PaginatedCreationsRequest, defaultValue?:PaginatedCreations)=>Promise<PaginatedCreations>})&(PaginatedCreationsPromiseChain & {get: (request: PaginatedCreationsRequest, defaultValue?:PaginatedCreations)=>Promise<PaginatedCreations>}),myStats:(UserStatsPromiseChain & {get: (request: UserStatsRequest, defaultValue?:UserStats)=>Promise<UserStats>}),sharedVariations:((args?:{limit?: (Scalars['Int'] | null),page?: (Scalars['Int'] | null)})=>PaginatedVariationsPromiseChain & {get: (request: PaginatedVariationsRequest, defaultValue?:PaginatedVariations)=>Promise<PaginatedVariations>})&(PaginatedVariationsPromiseChain & {get: (request: PaginatedVariationsRequest, defaultValue?:PaginatedVariations)=>Promise<PaginatedVariations>}),styles:({get: (request: StyleRequest, defaultValue?:Style[])=>Promise<Style[]>}),surprisePrompts:({get: (request: SurprisePromptRequest, defaultValue?:SurprisePrompt[])=>Promise<SurprisePrompt[]>}),tokenAcquisition:((args:{tokenAcquisitionId: Scalars['String']})=>TokenAcquisitionPromiseChain & {get: (request: TokenAcquisitionRequest, defaultValue?:TokenAcquisition)=>Promise<TokenAcquisition>}),user:((args:{id: Scalars['String']})=>UserPromiseChain & {get: (request: UserRequest, defaultValue?:User)=>Promise<User>})}
 
-export interface QueryObservableChain{creation:((args:{creationId: Scalars['String']})=>CreationObservableChain & {get: (request: CreationRequest, defaultValue?:Creation)=>Observable<Creation>}),me:(UserObservableChain & {get: (request: UserRequest, defaultValue?:User)=>Observable<User>}),myCreations:((args?:{limit?: (Scalars['Int'] | null),page?: (Scalars['Int'] | null)})=>PaginatedCreationsObservableChain & {get: (request: PaginatedCreationsRequest, defaultValue?:PaginatedCreations)=>Observable<PaginatedCreations>})&(PaginatedCreationsObservableChain & {get: (request: PaginatedCreationsRequest, defaultValue?:PaginatedCreations)=>Observable<PaginatedCreations>}),myStats:(UserStatsObservableChain & {get: (request: UserStatsRequest, defaultValue?:UserStats)=>Observable<UserStats>}),sharedVariations:((args?:{limit?: (Scalars['Int'] | null),page?: (Scalars['Int'] | null)})=>PaginatedVariationsObservableChain & {get: (request: PaginatedVariationsRequest, defaultValue?:PaginatedVariations)=>Observable<PaginatedVariations>})&(PaginatedVariationsObservableChain & {get: (request: PaginatedVariationsRequest, defaultValue?:PaginatedVariations)=>Observable<PaginatedVariations>}),styles:({get: (request: StyleRequest, defaultValue?:Style[])=>Observable<Style[]>}),surprisePrompts:({get: (request: SurprisePromptRequest, defaultValue?:SurprisePrompt[])=>Observable<SurprisePrompt[]>}),tokenAcquisition:((args:{tokenAcquisitionId: Scalars['String']})=>TokenAcquisitionObservableChain & {get: (request: TokenAcquisitionRequest, defaultValue?:TokenAcquisition)=>Observable<TokenAcquisition>}),user:((args:{id: Scalars['String']})=>UserObservableChain & {get: (request: UserRequest, defaultValue?:User)=>Observable<User>})}
+export interface QueryObservableChain{creation:((args:{creationId: Scalars['String']})=>CreationObservableChain & {get: (request: CreationRequest, defaultValue?:Creation)=>Observable<Creation>}),creationModes:({get: (request: CreationModeRequest, defaultValue?:CreationMode[])=>Observable<CreationMode[]>}),me:(UserObservableChain & {get: (request: UserRequest, defaultValue?:User)=>Observable<User>}),myCreations:((args?:{limit?: (Scalars['Int'] | null),page?: (Scalars['Int'] | null)})=>PaginatedCreationsObservableChain & {get: (request: PaginatedCreationsRequest, defaultValue?:PaginatedCreations)=>Observable<PaginatedCreations>})&(PaginatedCreationsObservableChain & {get: (request: PaginatedCreationsRequest, defaultValue?:PaginatedCreations)=>Observable<PaginatedCreations>}),myStats:(UserStatsObservableChain & {get: (request: UserStatsRequest, defaultValue?:UserStats)=>Observable<UserStats>}),sharedVariations:((args?:{limit?: (Scalars['Int'] | null),page?: (Scalars['Int'] | null)})=>PaginatedVariationsObservableChain & {get: (request: PaginatedVariationsRequest, defaultValue?:PaginatedVariations)=>Observable<PaginatedVariations>})&(PaginatedVariationsObservableChain & {get: (request: PaginatedVariationsRequest, defaultValue?:PaginatedVariations)=>Observable<PaginatedVariations>}),styles:({get: (request: StyleRequest, defaultValue?:Style[])=>Observable<Style[]>}),surprisePrompts:({get: (request: SurprisePromptRequest, defaultValue?:SurprisePrompt[])=>Observable<SurprisePrompt[]>}),tokenAcquisition:((args:{tokenAcquisitionId: Scalars['String']})=>TokenAcquisitionObservableChain & {get: (request: TokenAcquisitionRequest, defaultValue?:TokenAcquisition)=>Observable<TokenAcquisition>}),user:((args:{id: Scalars['String']})=>UserObservableChain & {get: (request: UserRequest, defaultValue?:User)=>Observable<User>})}
 
 export interface StylePromiseChain{createdAt:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Promise<(Scalars['String'] | null)>}),id:({get:(request?:boolean|number,defaultValue?:Scalars['ID'])=>Promise<Scalars['ID']>}),imageUrl:({get:(request?:boolean|number,defaultValue?:Scalars['String'])=>Promise<Scalars['String']>}),name:({get:(request?:boolean|number,defaultValue?:Scalars['String'])=>Promise<Scalars['String']>}),negativePrompt:({get:(request?:boolean|number,defaultValue?:Scalars['String'])=>Promise<Scalars['String']>}),prompt:({get:(request?:boolean|number,defaultValue?:Scalars['String'])=>Promise<Scalars['String']>}),updatedAt:({get:(request?:boolean|number,defaultValue?:(Scalars['String'] | null))=>Promise<(Scalars['String'] | null)>})}
 

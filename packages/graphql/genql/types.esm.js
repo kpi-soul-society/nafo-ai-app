@@ -4,11 +4,11 @@ export default {
         3,
         4,
         5,
-        6,
-        8,
-        10,
-        17,
-        19
+        7,
+        9,
+        11,
+        18,
+        20
     ],
     "types": {
         "CheckoutSession": {
@@ -33,6 +33,9 @@ export default {
             "iterationCount": [
                 4
             ],
+            "modeId": [
+                1
+            ],
             "negativePrompt": [
                 1
             ],
@@ -46,7 +49,7 @@ export default {
                 1
             ],
             "styles": [
-                14
+                15
             ],
             "textPrompt": [
                 1
@@ -58,7 +61,7 @@ export default {
                 4
             ],
             "variations": [
-                21
+                22
             ],
             "__typename": [
                 1
@@ -67,16 +70,36 @@ export default {
         "ID": {},
         "Int": {},
         "CreationCompletionStatus": {},
+        "CreationMode": {
+            "createdAt": [
+                1
+            ],
+            "id": [
+                3
+            ],
+            "imageUrl": [
+                1
+            ],
+            "name": [
+                1
+            ],
+            "updatedAt": [
+                1
+            ],
+            "__typename": [
+                1
+            ]
+        },
         "Currency": {},
         "CurrencyToTotalDonation": {
             "EUR": [
-                8
+                9
             ],
             "UAH": [
-                8
+                9
             ],
             "USD": [
-                8
+                9
             ],
             "__typename": [
                 1
@@ -92,13 +115,13 @@ export default {
                         "Int!"
                     ],
                     "currency": [
-                        6,
+                        7,
                         "Currency!"
                     ]
                 }
             ],
             "createSupportRequest": [
-                10,
+                11,
                 {
                     "customerEmail": [
                         1,
@@ -115,7 +138,7 @@ export default {
                 }
             ],
             "deleteCreation": [
-                10,
+                11,
                 {
                     "creationId": [
                         1,
@@ -124,7 +147,7 @@ export default {
                 }
             ],
             "deleteMyUser": [
-                10
+                11
             ],
             "setCreationThumbnail": [
                 2,
@@ -140,7 +163,7 @@ export default {
                 }
             ],
             "setUserReferrerId": [
-                18,
+                19,
                 {
                     "referrerId": [
                         1,
@@ -149,7 +172,7 @@ export default {
                 }
             ],
             "setVariationPublicity": [
-                21,
+                22,
                 {
                     "isSharedToCommunity": [
                         4,
@@ -200,7 +223,7 @@ export default {
                 4
             ],
             "variations": [
-                21
+                22
             ],
             "__typename": [
                 1
@@ -216,24 +239,13 @@ export default {
                     ]
                 }
             ],
+            "creationModes": [
+                6
+            ],
             "me": [
-                18
+                19
             ],
             "myCreations": [
-                11,
-                {
-                    "limit": [
-                        4
-                    ],
-                    "page": [
-                        4
-                    ]
-                }
-            ],
-            "myStats": [
-                20
-            ],
-            "sharedVariations": [
                 12,
                 {
                     "limit": [
@@ -244,14 +256,28 @@ export default {
                     ]
                 }
             ],
-            "styles": [
-                14
+            "myStats": [
+                21
             ],
-            "surprisePrompts": [
+            "sharedVariations": [
+                13,
+                {
+                    "limit": [
+                        4
+                    ],
+                    "page": [
+                        4
+                    ]
+                }
+            ],
+            "styles": [
                 15
             ],
+            "surprisePrompts": [
+                16
+            ],
             "tokenAcquisition": [
-                16,
+                17,
                 {
                     "tokenAcquisitionId": [
                         1,
@@ -260,7 +286,7 @@ export default {
                 }
             ],
             "user": [
-                18,
+                19,
                 {
                     "id": [
                         1,
@@ -320,7 +346,7 @@ export default {
                 1
             ],
             "donationCurrencyToTokenExchangeRate": [
-                8
+                9
             ],
             "id": [
                 3
@@ -329,7 +355,7 @@ export default {
                 1
             ],
             "status": [
-                17
+                18
             ],
             "tokenNumber": [
                 4
@@ -371,7 +397,7 @@ export default {
                 1
             ],
             "role": [
-                19
+                20
             ],
             "tokenNumber": [
                 4
@@ -389,7 +415,7 @@ export default {
                 4
             ],
             "totalDonationsByCurrency": [
-                7
+                8
             ],
             "totalReferrals": [
                 4
@@ -403,7 +429,7 @@ export default {
                 1
             ],
             "creation": [
-                22
+                23
             ],
             "creationId": [
                 3
@@ -441,7 +467,7 @@ export default {
                 1
             ],
             "styles": [
-                14
+                15
             ],
             "textPrompt": [
                 1

@@ -260,6 +260,12 @@ export async function dispatchCreationGeneration(payload: ServerCreationGenerati
       .where('id', '=', creation.id)
       .executeTakeFirstOrThrow();
 
+    const mode = await trx
+      .selectFrom('creationMode')
+      .selectAll()
+      .where('id', '=', creationBeforeGenerationStart.modeId)
+      .executeTakeFirst();
+
     const generationPayload = {
       variationUploadUrls,
       textPrompt: creationBeforeGenerationStart.enhancedTextPrompt || creationBeforeGenerationStart.textPrompt,
@@ -269,6 +275,7 @@ export async function dispatchCreationGeneration(payload: ServerCreationGenerati
       creationId: creationBeforeGenerationStart.id,
       negativePrompt: creationBeforeGenerationStart.negativePrompt,
       styles: selectedStyles,
+      mode: mode?.name,
     } as CreationGenerationMessagePayload;
 
     console.log(generationPayload);
@@ -324,6 +331,7 @@ export interface CreationGenerationMessagePayload {
   userId: string;
   creationId: string;
   startingImageUrl?: string;
+  mode?: 'avatar' | 'artwork';
 }
 
 export interface GetCreation {

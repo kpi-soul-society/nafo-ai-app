@@ -7,6 +7,7 @@ type Creation {
   createdAt: String!
   id: ID!
   iterationCount: Int!
+  modeId: String
   negativePrompt: String
   parentCreationId: String
   resultImageUrl: String
@@ -22,6 +23,14 @@ enum CreationCompletionStatus {
   COMPLETED
   IN_PROGRESS
   PENDING
+}
+
+type CreationMode {
+  createdAt: String
+  id: ID!
+  imageUrl: String
+  name: String!
+  updatedAt: String
 }
 
 enum Currency {
@@ -64,6 +73,7 @@ type PaginatedVariations {
 
 type Query {
   creation(creationId: String!): Creation!
+  creationModes: [CreationMode!]!
   me: User!
   myCreations(limit: Int = 6, page: Int = 1): PaginatedCreations!
   myStats: UserStats!

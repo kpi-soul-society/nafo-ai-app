@@ -15,6 +15,14 @@ export var isCreation = function(obj) {
 
 
 
+var CreationMode_possibleTypes = ['CreationMode']
+export var isCreationMode = function(obj) {
+  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isCreationMode"')
+  return CreationMode_possibleTypes.includes(obj.__typename)
+}
+
+
+
 var CurrencyToTotalDonation_possibleTypes = ['CurrencyToTotalDonation']
 export var isCurrencyToTotalDonation = function(obj) {
   if (!obj || !obj.__typename) throw new Error('__typename is missing in "isCurrencyToTotalDonation"')

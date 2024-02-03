@@ -42,6 +42,7 @@ const baseCreationGenerationSchema = z.object({
   startingImageUrl: z.string().nullish(),
   parentCreationId: z.string().nullish(),
   negativePrompt: z.string().nullish(),
+  modeId: z.string(),
 });
 
 export const clientSideCreationGenerationSchema = baseCreationGenerationSchema

@@ -17,7 +17,7 @@ export function DatabaseMigrations({ stack }: StackContext) {
     ],
     timeout: '3 minutes',
     nodejs: {
-      install: ['kysely'],
+      install: ['kysely', 'ulid'],
     },
   });
 
