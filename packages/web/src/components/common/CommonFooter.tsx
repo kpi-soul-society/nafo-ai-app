@@ -48,17 +48,7 @@ export const CommonFooter = ({ linkPreset = [] }: FooterProps) => {
                     <span className="hover:text-primary md:text-xl 2xl:text-2xl">{anchor.name}</span>
                   </Link>
                 ))}
-            <Cheebs
-              onClick={() => {
-                isWaitlistEnabled
-                  ? setSignInDialogOpen(true)
-                  : session
-                  ? router.push('/editor')
-                  : setSignInDialogOpen(true);
-              }}
-              withText
-              text={isWaitlistEnabled ? 'join waitlist' : session ? 'more cheebs!' : 'join the squad'}
-            />
+            <Cheebs withText text={'keep rocking!'} />
             <SignInDialog open={isSignInDialogOpen} onClose={() => setSignInDialogOpen(false)} />
           </div>
         </div>

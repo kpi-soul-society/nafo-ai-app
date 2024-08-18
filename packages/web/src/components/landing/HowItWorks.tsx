@@ -8,7 +8,7 @@ export const HowItWorks = () => {
   return (
     <div id={HOW_IT_WORKS_ID} className="flex flex-col gap-y-8 sm:gap-y-14">
       <div>
-        <h1 className="text-3xl md:text-3xl lg:text-5xl 2xl:text-6xl">How it works?</h1>
+        <h1 className="text-3xl md:text-3xl lg:text-5xl 2xl:text-6xl">How it worked?</h1>
       </div>
 
       <div className="flex flex-col gap-14 xl:flex-row xl:gap-32">

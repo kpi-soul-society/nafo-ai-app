@@ -1,14 +1,11 @@
 import { Toaster } from 'react-hot-toast';
-import { InMemoryStorageProvider, TOGGLED_PLATFORM_URLS, ToggledClient } from '@toggled.dev/toggled-client-js';
 import { Metadata } from 'next';
 import { Inter, Russo_One } from 'next/font/google';
-import Script from 'next/script';
 import { getServerSession } from 'next-auth';
 
 import AuthContext from '@/components/authenticator/NextAuthProvider';
 import { authOptions } from '@/lib/auth/config';
-import { STAGE, TOGGLED_FEATURE_FLAGS_CLIENT_KEY } from '@/lib/config/next';
-import { FeatureFlagProvider } from '@/lib/contexts/FeatureFlagProvider';
+import { STAGE } from '@/lib/config/next';
 
 import './globals.css';
 
@@ -53,41 +50,11 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const session = await getServerSession(authOptions);
-  const toggled = new ToggledClient({
-    url: TOGGLED_PLATFORM_URLS.EUC1,
-    clientKey: TOGGLED_FEATURE_FLAGS_CLIENT_KEY,
-    storageProvider: new InMemoryStorageProvider(),
-  });
-
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error - we want to just fetch once instead of polling since we're using SSR and Lambda
-  await toggled.fetchToggles();
-  const toggles = toggled.getAllToggles();
-
   return (
     <html lang="en">
-      {STAGE === 'prod' && (
-        <>
-          <Script src="https://www.googletagmanager.com/gtag/js?id=G-YBLQBLE9G3" strategy="afterInteractive" />
-          <Script id="google-analytics" strategy="afterInteractive">
-            {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){window.dataLayer.push(arguments);}
-                gtag('js', new Date());
-
-                gtag('config', 'G-YBLQBLE9G3');
-              `}
-          </Script>
-
-          <Script type="text/javascript" src="/hotjar.js"></Script>
-        </>
-      )}
       <body className={`${inter.className} ${russo.variable}`}>
-        <AuthContext session={session}>
-          <Toaster />
-          <FeatureFlagProvider featureFlags={toggles}>{children}</FeatureFlagProvider>
-        </AuthContext>
+        <Toaster />
+        {children}
       </body>
     </html>
   );

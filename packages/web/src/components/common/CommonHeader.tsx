@@ -1,16 +1,11 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { useSession } from 'next-auth/react';
 
 import { HOME_ID } from '@/lib/constants/routes';
 import { useFeatureFlagContext } from '@/lib/contexts/FeatureFlagProvider';
 
-import { UserMenu } from '../common/UserMenu';
 import { Logo } from '../images/Logo';
-
-import { RoutesMenu } from './RoutesMenu';
-import { SignInDialog } from './SignInDialog';
 
 interface LinkPresetItem {
   route: string;
@@ -23,8 +18,6 @@ interface HeaderProps {
 }
 
 export const CommonHeader = ({ linkPreset = [], logoLink = '/' }: HeaderProps) => {
-  const [isSignInDialogOpen, setSignInDialogOpen] = useState(false);
-  const { data: session } = useSession();
   const { isFeatureEnabled } = useFeatureFlagContext();
   const isWaitlistEnabled = isFeatureEnabled('isWaitlistEnabled');
 
@@ -46,34 +39,6 @@ export const CommonHeader = ({ linkPreset = [], logoLink = '/' }: HeaderProps) =
               <span className="hover:text-secondary hidden text-xl md:block lg:text-3xl">{anchor.name}</span>
             </Link>
           ))}
-      {isWaitlistEnabled ? (
-        <>
-          <button
-            className="bg-secondary text-md rounded-md px-3 py-2 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 md:text-2xl lg:text-3xl"
-            onClick={() => setSignInDialogOpen(true)}
-          >
-            JOIN!
-          </button>
-          <SignInDialog open={isSignInDialogOpen} onClose={() => setSignInDialogOpen(false)} />
-        </>
-      ) : session ? (
-        <div className="flex items-center gap-4">
-          <div className="sm:hidden">
-            <RoutesMenu routes={linkPreset} />
-          </div>
-          <UserMenu />
-        </div>
-      ) : (
-        <>
-          <button
-            className="bg-secondary text-md rounded-md px-3 py-2 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 md:text-2xl lg:text-3xl"
-            onClick={() => setSignInDialogOpen(true)}
-          >
-            JOIN!
-          </button>
-          <SignInDialog open={isSignInDialogOpen} onClose={() => setSignInDialogOpen(false)} />
-        </>
-      )}
     </header>
   );
 };
